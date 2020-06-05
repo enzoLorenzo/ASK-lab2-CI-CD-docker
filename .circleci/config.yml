@@ -12,6 +12,7 @@ jobs:
     executor:
       name: node/default
     steps:
+      - checkout
       - node/install-packages:
           app-dir: ./server
       - run:
@@ -27,6 +28,7 @@ jobs:
     executor:
       name: node/default
     steps:
+      - checkout
       - run:
           name: Install client
           command: npm install
