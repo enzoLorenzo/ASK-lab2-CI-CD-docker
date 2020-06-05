@@ -9,6 +9,8 @@ jobs:
     steps:
       - checkout
   server_test:
+    executor:
+      name: node/default
     steps:
       - node/install-packages:
           app-dir: ./server
@@ -22,6 +24,8 @@ jobs:
           working_directory: ./server
           
   client_test:
+    executor:
+      name: node/default
     steps:
       - run:
           name: Install client
