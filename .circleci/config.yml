@@ -9,9 +9,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Running docker containers
-          command: docker-compose up -d
+      
   server_test:
     executor:
       name: node/default
@@ -41,6 +39,28 @@ jobs:
           name: Running server tests
           command: npm test
           working_directory: ./client
+  docker_image_build:
+    machine: true
+    steps:
+      - checkout          
+      - run:
+          name: Build and push database_image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "enzolorenzo" --password-stdin
+            sudo docker build ./db -t database_image
+            sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:database_image
+      - run:
+          name: Build and push server_image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "enzolorenzo" --password-stdin
+            sudo docker build ./server -t server_image
+            sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:server_image
+      - run:
+          name: Build and push client_image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "enzolorenzo" --password-stdin
+            sudo docker build ./client -t client_image
+            sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:client_image
 workflows:
     build-and-test:
       jobs:
@@ -63,3 +83,7 @@ workflows:
                   - master
             requires:
                 - build
+        - docker_image_build:
+            requires:
+              - server_test
+              - client_test
