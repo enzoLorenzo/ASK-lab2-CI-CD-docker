@@ -3,11 +3,6 @@ orbs:
   node: circleci/node@2.1.0
 jobs:
   build-and-test:
-  build:
-    executor:
-      name: node/default
-    steps:
-      - checkout
   server_test:
     executor:
       name: node/default
