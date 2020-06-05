@@ -8,23 +8,19 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          app-dirr: ./server
-      - node/install-packages:
-          app-dirr: ./client
+          app-dir: ./server
       - run:
-          name: SERVER- Install
           command: npm install
           working_directory: ./server
       - run:
-          name: CLIENT- Install
           command: npm install
           working_directory: ./client
       - run:
-          name: SERVER- Running tests
+          name: Running server tests
           command: npm test
           working_directory: ./server
       - run:
-          name: CLIENT- Running tests
+          name: Running server tests
           command: npm test
           working_directory: ./client
 workflows:
