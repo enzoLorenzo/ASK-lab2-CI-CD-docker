@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@2.1.0
 jobs:
-  build-and-test:
+  build-and-test:  
   server_test:
     executor:
       name: node/default
@@ -18,6 +18,7 @@ jobs:
           name: Running server tests
           command: npm test
           working_directory: ./server
+          
   client_test:
     executor:
       name: node/default
@@ -34,7 +35,5 @@ jobs:
 workflows:
     build-and-test:
       jobs:
-        - build-and-test:
-            jobs:
-              - server_test
-              - client_test
+        - server_test
+        - client_test
