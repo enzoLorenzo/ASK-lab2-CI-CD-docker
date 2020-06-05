@@ -46,19 +46,19 @@ jobs:
       - run:
           name: Build and push database_image
           command: |
-            echo "$DOCKERHUB_PASS" | docker login -u "enzolorenzo" --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u "enzolorenzo" --password-stdin
             sudo docker build ./db -t database_image
             sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:database_image
       - run:
           name: Build and push server_image
           command: |
-            echo "$DOCKERHUB_PASS" | docker login -u "enzolorenzo" --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u "enzolorenzo" --password-stdin
             sudo docker build ./server -t server_image
             sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:server_image
       - run:
           name: Build and push client_image
           command: |
-            echo "$DOCKERHUB_PASS" | docker login -u "enzolorenzo" --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u "enzolorenzo" --password-stdin
             sudo docker build ./client -t client_image
             sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:client_image
 workflows:
