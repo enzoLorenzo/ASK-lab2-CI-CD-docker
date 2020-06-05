@@ -48,18 +48,21 @@ jobs:
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             sudo docker build ./db -t database_image
+            sudo docker tag database_image enzolorenzo/ask-lab2-ci-cd-docker:database_image
             sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:database_image
       - run:
           name: Build and push server_image
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             sudo docker build ./server -t server_image
+            sudo docker tag server_image enzolorenzo/ask-lab2-ci-cd-docker:server_image
             sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:server_image
       - run:
           name: Build and push client_image
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             sudo docker build ./client -t client_image
+            sudo docker tag client_image enzolorenzo/ask-lab2-ci-cd-docker:client_image
             sudo docker push enzolorenzo/ask-lab2-ci-cd-docker:client_image
 workflows:
     build-and-test:
