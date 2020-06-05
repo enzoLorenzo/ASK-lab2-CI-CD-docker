@@ -12,19 +12,19 @@ jobs:
       - node/install-packages:
           app-dirr: ./client
       - run:
-          name: SERVER: Install
+          name: SERVER- Install
           command: npm install
           working_directory: ./server
       - run:
-          name: CLIENT: Install
+          name: CLIENT- Install
           command: npm install
           working_directory: ./client
       - run:
-          name: SERVER: Running tests
+          name: SERVER- Running tests
           command: npm test
           working_directory: ./server
       - run:
-          name: CLIENT: Running tests
+          name: CLIENT- Running tests
           command: npm test
           working_directory: ./client
 workflows:
