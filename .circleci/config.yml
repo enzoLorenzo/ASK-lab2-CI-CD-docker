@@ -40,10 +40,22 @@ jobs:
 workflows:
     build-and-test:
       jobs:
-        - build
+        - build:
+          filters:
+            branches:
+              only:
+                - master
         - server_test:
+            filters:
+              branches:
+                only:
+                  - master
             requires:
                 - build
         - client_test:
+            filters:
+              branches:
+                only:
+                  - master
             requires:
                 - build
